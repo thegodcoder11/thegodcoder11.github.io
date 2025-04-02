@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +37,15 @@
         const gridSize = 20;
         let snake = [{ x: 10 * gridSize, y: 10 * gridSize }];
         let food = { x: 15 * gridSize, y: 15 * gridSize };
+        let goldenApple = null;
+        let whiteApples = [];
         let dx = gridSize, dy = 0;
         let score = 0;
         let gameInterval;
         let gameStarted = false;
+        let lastGoldenAppleScore = 0;
+        let lastWhiteAppleSpawn = 0;
+        let whiteApplesEaten = 0;
 
         function gameLoop() {
             moveSnake();
@@ -48,6 +54,25 @@
                 score += 10;
                 growSnake();
                 placeFood();
+                goldenApple = null; // Despawn golden apple when eating a red apple
+                whiteApples = [];
+            }
+            if (goldenApple && eatGoldenApple()) {
+                score += 50;
+                goldenApple = null;
+                placeFood();
+                lastGoldenAppleScore = score;
+                whiteApples = [];
+            }
+            if (score - lastGoldenAppleScore >= 100 && !goldenApple) {
+                spawnGoldenApple();
+            }
+            if (score >= 1000 && score % 1000 === 0 && score !== lastWhiteAppleSpawn) {
+                spawnWhiteApples();
+                lastWhiteAppleSpawn = score;
+            }
+            if (whiteApples.length > 0) {
+                checkWhiteApples();
             }
             drawGame();
         }
@@ -56,12 +81,14 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawGrid();
             drawSnake();
-            drawFood();
+            if (food) drawFood();
+            if (goldenApple) drawGoldenApple();
+            if (whiteApples.length > 0) drawWhiteApples();
             drawScore();
         }
 
         function drawGrid() {
-            ctx.strokeStyle = "#444";
+            ctx.strokeStyle = (score % 500 < 20) ? "black" : "#444"; // Turns black at 500, white at 520
             for (let x = 0; x < canvas.width; x += gridSize) {
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
@@ -92,6 +119,22 @@
             ctx.fill();
         }
 
+        function drawGoldenApple() {
+            ctx.fillStyle = "gold";
+            ctx.beginPath();
+            ctx.arc(goldenApple.x + gridSize / 2, goldenApple.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawWhiteApples() {
+            ctx.fillStyle = "white";
+            whiteApples.forEach(apple => {
+                ctx.beginPath();
+                ctx.arc(apple.x + gridSize / 2, apple.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
         function drawScore() {
             ctx.fillStyle = "white";
             ctx.font = "24px Arial";
@@ -101,7 +144,6 @@
         function moveSnake() {
             let head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
-            // **Teleport to the other side when hitting walls**
             if (head.x < 0) head.x = canvas.width - gridSize;
             else if (head.x >= canvas.width) head.x = 0;
             if (head.y < 0) head.y = canvas.height - gridSize;
@@ -122,11 +164,52 @@
         }
 
         function eatFood() {
-            return snake[0].x === food.x && snake[0].y === food.y;
+            if (food && snake[0].x === food.x && snake[0].y === food.y) {
+                food = null;
+                goldenApple = null; // Despawn golden apple if a red apple is eaten
+                return true;
+            }
+            return false;
+        }
+
+        function eatGoldenApple() {
+            return goldenApple && snake[0].x === goldenApple.x && snake[0].y === goldenApple.y;
+        }
+
+        function checkWhiteApples() {
+            whiteApples = whiteApples.filter(apple => {
+                if (snake[0].x === apple.x && snake[0].y === apple.y) {
+                    score += 10;
+                    whiteApplesEaten++;
+                    return false;
+                }
+                return true;
+            });
+
+            if (whiteApplesEaten === 10) {
+                snake = snake.slice(0, Math.ceil(snake.length / 2));
+                whiteApples = [];
+                whiteApplesEaten = 0;
+            }
         }
 
         function placeFood() {
-            food = {
+            food = getRandomGridPosition();
+        }
+
+        function spawnGoldenApple() {
+            goldenApple = getRandomGridPosition();
+        }
+
+        function spawnWhiteApples() {
+            whiteApples = [];
+            for (let i = 0; i < 10; i++) {
+                whiteApples.push(getRandomGridPosition());
+            }
+        }
+
+        function getRandomGridPosition() {
+            return {
                 x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
                 y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize
             };
@@ -152,17 +235,10 @@
 
         function gameOver() {
             clearInterval(gameInterval);
-            ctx.fillStyle = "white";
-            ctx.font = "30px Arial";
-            ctx.fillText("Game Over", 200, 280);
-            ctx.fillText("Score: " + score, 230, 320);
             startMessage.style.display = "block";
             startMessage.innerText = "Game Over! Press ENTER to Restart";
             gameStarted = false;
-            snake = [{ x: 10 * gridSize, y: 10 * gridSize }];
-            dx = gridSize;
-            dy = 0;
-            score = 0;
+            location.reload();
         }
     </script>
 </body>
