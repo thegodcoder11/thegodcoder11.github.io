@@ -1,0 +1,19 @@
+#title {
+
+background-color: cadetblue;
+font-size: 2em;
+width: 20%;
+text-align: center;
+}
+.content {
+    background-color: rgb(185, 114, 6);
+    font:  sans-serif;
+    text-decoration: dotted;
+    width: 30px;
+}
+#all{
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;
+ align-items: center;
+}
