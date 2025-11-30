@@ -1,19 +1,41 @@
-#title {
+#navbar {
+    background: rebeccapurple;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 3vw;
+    padding-right: 3vw;
+}
 
-background-color: cadetblue;
-font-size: 2em;
-width: 20%;
-text-align: center;
+#main {
+    background-color: rgba(255, 0, 0, 0.807);
+    display: flex;
+  
+    gap: 6vw;
+    padding-left: 5vw;
+    height: 90%;
+
+
+
+
 }
-.content {
-    background-color: rgb(185, 114, 6);
-    font:  sans-serif;
-    text-decoration: dotted;
-    width: 30px;
+
+.nav-link {
+    background-color: mediumspringgreen;
+
+
 }
-#all{
- display: flex;
- flex-direction: column;
- justify-content: flex-start;
- align-items: center;
+
+#left-col{
+background: mintcream;
+width: 49%;
+
+}
+#right-col{
+background: blue;
+width: 49.5%;
+}
+#hero{
+    width: 40vw;
+    max-height:35vh ;
 }
