@@ -1,5 +1,5 @@
 #navbar {
-    background: rebeccapurple;
+    
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -8,7 +8,7 @@
 }
 
 #main {
-    background-color: rgba(255, 0, 0, 0.807);
+
     display: flex;
   
     gap: 6vw;
@@ -21,21 +21,29 @@
 }
 
 .nav-link {
-    background-color: mediumspringgreen;
+
 
 
 }
 
 #left-col{
-background: mintcream;
+
 width: 49%;
 
 }
 #right-col{
-background: blue;
+
 width: 49.5%;
 }
 #hero{
-    width: 40vw;
-    max-height:35vh ;
+    width: 40%;
+}
+
+#all{
+    background-image:repeating-conic-gradient(  #3fa 5%,gold 10%,black 15%) ;
+    border-radius: 50%;
+}
+
+#otherweb{
+    background-color: #3fa;
 }
