@@ -1,5 +1,5 @@
 #navbar {
-    
+
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -10,7 +10,7 @@
 #main {
 
     display: flex;
-  
+
     gap: 6vw;
     padding-left: 5vw;
     height: 90%;
@@ -24,26 +24,72 @@
 
 
 
-}
+    color: #777;
 
-#left-col{
 
-width: 49%;
 
 }
-#right-col{
 
-width: 49.5%;
+.nav-link a {
+    text-decoration: none;
+    color: #3fa;
+    text-shadow: 0.05em 0.05em 0.01em #777;
+    font-weight: bold;
+    transition: color 0.5s;
 }
-#hero{
+
+.nav-link a:hover {
+    text-decoration: underline;
+    color: #0b7777;
+
+}
+
+#left-col {
+
+    width: 49%;
+
+}
+
+#right-col {
+
+    width: 49.5%;
+}
+
+#hero {
     width: 40%;
 }
 
-#all{
-    background-image:repeating-conic-gradient(  #3fa 5%,gold 10%,black 15%) ;
-    border-radius: 50%;
+body {
+    background-image: repeating-conic-gradient(#3fa 50%, #2d9 100%, #1c8 150%);
+
+    overflow: hidden
 }
 
-#otherweb{
+#otherweb {
     background-color: #3fa;
+}
+
+.secretlink {
+
+position: fixed;
+top: 0.5em;
+right: 24em;
+text-decoration: none;
+    color: #3fa;
+    text-shadow: 0.05em 0.05em 0.01em #777;
+    font-weight: bold;
+    transition: color 0.5s;
+cursor: pointer;
+}
+#nanoman{
+background-color: #0b7777;
+color: aqua;
+text-size-adjust: var(0.5em);
+font-size: 3em;
+font-family: 'Times New Roman', Times, serif;
+
+
+}
+#nanomanresetbutton{
+    background-color: #3e9999;
 }
