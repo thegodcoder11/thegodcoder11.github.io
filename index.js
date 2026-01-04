@@ -27,8 +27,8 @@ function makeRandomColor() {
     let r = Math.floor(Math.random() * 1)
     let g = Math.floor(Math.random() * 256)
     let b = Math.floor(Math.random() * 255)
-let color = `rgb(${r}, ${g}, ${b})`
-return color
+    let color = `rgb(${r}, ${g}, ${b})`
+    return color
 
 }
 function makeRandomColor2() {
@@ -36,7 +36,7 @@ function makeRandomColor2() {
     let r = Math.floor(Math.random() * 256)
     let g = Math.floor(Math.random() * 256)
     let b = Math.floor(Math.random() * 2)
-let color = `rgb(${r}, ${g}, ${b})`
-return color
+    let color = `rgb(${r}, ${g}, ${b})`
+    return color
 
 }
