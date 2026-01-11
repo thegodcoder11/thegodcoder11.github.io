@@ -31,13 +31,20 @@ let obj = {
     ctx.fillStyle = "#1a4"
     ctx.fillRect (player.x,player.y, 50,50)
     
-    ctx.fillStyle = '#a00'
-function updateplayerposition
-(e) {
+    function updateplayerposition
+    (e) {
+        
+        console.log(e)
+        player.x = e.offsetX
+        player.y = e.offsetY
+        drawgame()
+}
+function drawgame () {
 
-console.log(e)
-player.x = e.layerX
-player.y = e.layerY
+
+  ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#a00'
 ctx.fillRect(player.x,player.y,50,50)
 }
 

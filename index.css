@@ -108,21 +108,12 @@ body {
 
 .game-container {
 
-    display: flex;
-
-    gap: 6vw;
-    padding-left: 5vw;
-    height: 90%;
-    position: fixed;
-    background: rgb(34, 17, 147);
-    width: 40em;
-    height: 24em;
-    justify-self: center;
-    border-radius: 2%;
-    align-self: anchor-center;
-    box-shadow: 0.3em 0.3em 1em 0;
-
-
+   background: #fff;
+   justify-self: center;
+   box-shadow: 0.3em 0.3em 1em 0 ;
+border-radius: 0.5em;
+padding: 1em;
+text-align: center;
 }
 
 .game-canvas {}
