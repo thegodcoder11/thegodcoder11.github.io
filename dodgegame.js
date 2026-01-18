@@ -2,6 +2,7 @@ console.log("hello")
 
 
 let canvas = document.getElementById("game-canvas");
+canvas.style.cursor = "none";
 console.log("canvasssssss");
 let ctx = canvas.getContext('2d');
 canvas.width = 700;
@@ -22,31 +23,70 @@ let obj = {
     a: 5,
     b: 7,
 };
-    console.log (obj.a)
+console.log(obj.a)
 
-    let player = {
-        x:350,
-        y:200, 
-    }
-    ctx.fillStyle = "#1a4"
-    ctx.fillRect (player.x,player.y, 50,50)
-    
-    function updateplayerposition
+let player = {
+    x: 350,
+    y: 200,
+    width:5,
+    height:6,
+}
+
+
+
+let baddies = []
+
+
+function updateplayerposition
     (e) {
-        
-        console.log(e)
-        player.x = e.offsetX
-        player.y = e.offsetY
-        drawgame()
+
+    console.log(e)
+    player.x = e.offsetX - 25
+    player.y = e.offsetY - 25
+    drawgame()
 }
-function drawgame () {
+function drawgame() {
+    ctx.fillStyle =  
 
-
-  ctx.fillStyle = "rgba(255, 255, 255, 1)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#a00'
-ctx.fillRect(player.x,player.y,50,50)
+    ctx.fillStyle = "rgba(255, 255, 255, 1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+for(let i = 0;i<baddies.length;i++){
+    
 }
 
 
-canvas.addEventListener("mousemove",updateplayerposition)
+    ctx.fillStyle = '#a00'
+    ctx.fillRect(player.x, player.y, player.width, player.height)
+}
+
+
+function addbaddies (x,y) {
+
+let baddie = {x,y,width:22,hieght:20,}
+      
+baddies.push (baddie)
+}
+
+
+addbaddies (300,50)
+addbaddies (20,40)
+addbaddies (99,199)
+addbaddies(200,222)
+console.log (baddies)
+
+
+
+
+
+
+
+
+
+canvas.addEventListener("mousemove", updateplayerposition)
+
+let ar = [5, 7, 9]
+console.log(ar[1])
+
+ar.push(11)
+console.log(ar[3])
+
