@@ -1,9 +1,11 @@
-console.log("hello")
-
-
-let canvas = document.getElementById("game-canvas");
+ let gameRunning = true;
+ 
+ 
+ 
+ 
+ let canvas = document.getElementById("game-canvas");
 canvas.style.cursor = "none";
-console.log("canvasssssss");
+
 let ctx = canvas.getContext('2d');
 canvas.width = 700;
 canvas.height = 400;
@@ -18,75 +20,84 @@ function add3(i) {
     return i;
 }
 let b = add3(a);
-console.log(b)
 let obj = {
     a: 5,
     b: 7,
 };
-console.log(obj.a)
-
 let player = {
     x: 350,
     y: 200,
-    width:5,
-    height:6,
+    width: 5,
+    height: 6,
 }
-
-
-
 let baddies = []
-
-
 function updateplayerposition
     (e) {
-
-    console.log(e)
     player.x = e.offsetX - 25
     player.y = e.offsetY - 25
     drawgame()
+    let result = CheckColision(baddies[0], player)
+    if (result){
+
+
+
+
+
+
+    gameRunning = false
+ }
 }
 function drawgame() {
-    ctx.fillStyle =  
+    ctx.fillStyle =
+        ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-for(let i = 0;i<baddies.length;i++){
-    
+if (gameRunning === false){
+return;
+
+
+
 }
 
-
+    for (let i = 0; i < baddies.length; i++) {
+        let obj = baddies[i]
+        ctx.fillStyle = '#000'
+        ctx.fillRect(obj.x, obj.y, obj.width, obj.height)
+    }
     ctx.fillStyle = '#a00'
     ctx.fillRect(player.x, player.y, player.width, player.height)
 }
+function addbaddies(x, y) {
+    let baddie = { x, y, width: 22, height: 20, }
+    baddies.push(baddie)
+}
+addbaddies(300, 50)
+addbaddies(20, 40)
+addbaddies(99, 199)
+addbaddies(200, 222)
+console.log(baddies)
+canvas.addEventListener("mousemove", updateplayerposition)
+let ar = [5, 7, 9]
+ar.push(11)
+function CheckColision(a, b) {
+    if (a.x < b.x + b.width && b.x < a.x + a.width &&
+        a.y < b.y + b.width && b.y < a.y + a.width
+    ) {
+        return true
+    } else {
+        return false
+    }
+    
+}
+window.addEventListener ("keydown", keydown)
+function keydown (e) {
 
-
-function addbaddies (x,y) {
-
-let baddie = {x,y,width:22,hieght:20,}
-      
-baddies.push (baddie)
+if (e.key === " " || e.key === "Enter" )
+{
+    gameRunning = true
+}
 }
 
 
-addbaddies (300,50)
-addbaddies (20,40)
-addbaddies (99,199)
-addbaddies(200,222)
-console.log (baddies)
 
-
-
-
-
-
-
-
-
-canvas.addEventListener("mousemove", updateplayerposition)
-
-let ar = [5, 7, 9]
-console.log(ar[1])
-
-ar.push(11)
-console.log(ar[3])
-
+drawgame ()
