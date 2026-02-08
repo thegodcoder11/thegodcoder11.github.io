@@ -27,6 +27,31 @@
 
 }
 
+
+.slide-down-animation  {
+opacity: 0;
+/*transform: translateY(-100vh);*/
+animation: slideDown 2s forwards ;
+animation-delay: 1s;
+
+}
+@keyframes slideDown {
+
+from { opacity: 0;
+/*transform: translateY(-100vh);*/
+
+
+}
+to {
+
+    opacity: 1;
+/*transform: translateY(-0);*/
+
+}
+
+
+}
+
 .nav-link {
 
 
@@ -53,17 +78,17 @@
 
 #left-col {
 
-    width: 49%;
-
 }
 
 #right-col {
-
+font-family: math;
+color: #222;
+padding:2em;
     width: 49.5%;
 }
 
 #hero {
-    width: 40%;
+    width: 20em;
 }
 
 body {
@@ -116,4 +141,20 @@ padding: 1em;
 text-align: center;
 }
 
-.game-canvas {}
+.game-canvas {
+
+}
+
+
+.greetings {
+    
+color: #000;
+-webkit-text-stroke: 0.05em #555;
+font-size: 1.5em;
+}
+
+.avichai {
+font-size: 2.5em;
+font-weight: bold;
+
+}
