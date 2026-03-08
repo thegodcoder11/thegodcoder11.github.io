@@ -1,103 +1,128 @@
- let gameRunning = true;
- 
- 
- 
- 
- let canvas = document.getElementById("game-canvas");
-canvas.style.cursor = "none";
-
-let ctx = canvas.getContext('2d');
-canvas.width = 700;
-canvas.height = 400;
-ctx.fillStyle = "rgba(255, 255, 255, 1)";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = '#789';
-ctx.fillRect(50, 50, 25, 25)
-ctx.fillRect(300, 300, 10, 10)
-let a = 4000
-function add3(i) {
-    i = i + 3;
-    return i;
-}
-let b = add3(a);
-let obj = {
-    a: 5,
-    b: 7,
-};
-let player = {
-    x: 350,
-    y: 200,
-    width: 5,
-    height: 6,
-}
-let baddies = []
-function updateplayerposition
-    (e) {
-    player.x = e.offsetX - 25
-    player.y = e.offsetY - 25
-    drawgame()
-    let result = CheckColision(baddies[0], player)
-    if (result){
-
-
-
-
-
-
-    gameRunning = false
- }
-}
-function drawgame() {
-    ctx.fillStyle =
-        ctx.fillStyle = "rgba(255, 255, 255, 1)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-if (gameRunning === false){
-return;
-
-
-
-}
-
-    for (let i = 0; i < baddies.length; i++) {
-        let obj = baddies[i]
-        ctx.fillStyle = '#000'
-        ctx.fillRect(obj.x, obj.y, obj.width, obj.height)
+class GameController {
+    //properties    
+    gameRunning = true;
+    
+    //constructors
+    constructor() {
+        
+        this.addbaddies(300, 50)
+        this.addbaddies(20, 40)
+        this.addbaddies(99, 199)
+        this.addbaddies(200, 222)
+        gameV.canvas.addEventListener("mousemove", this.updateplayerposition)
+        
+        gameV.canvas.style.cursor = "none";
+        gameV.restartButton.addEventListener("click", () => {
+            this.gameRunning = true
+            gameV.drawgame()
+            gameV.canvas.style.cursor = "none";
+        })
+        window.addEventListener("keydown", this.keydown)
     }
-    ctx.fillStyle = '#a00'
-    ctx.fillRect(player.x, player.y, player.width, player.height)
-}
-function addbaddies(x, y) {
-    let baddie = { x, y, width: 22, height: 20, }
-    baddies.push(baddie)
-}
-addbaddies(300, 50)
-addbaddies(20, 40)
-addbaddies(99, 199)
-addbaddies(200, 222)
-console.log(baddies)
-canvas.addEventListener("mousemove", updateplayerposition)
-let ar = [5, 7, 9]
-ar.push(11)
-function CheckColision(a, b) {
-    if (a.x < b.x + b.width && b.x < a.x + a.width &&
-        a.y < b.y + b.width && b.y < a.y + a.width
-    ) {
-        return true
-    } else {
-        return false
+    //methods
+    addbaddies(x, y) {
+        let baddie = {
+            x,y, 
+            width:33,
+            height:33,
+
+        }
+        gameM.baddies.push(baddie) 
+    }
+
+    updateplayerposition = (e) => {
+        gameM.player.x = e.offsetX - 25
+        gameM.player.y = e.offsetY - 25
+        this.CheckAllBaddies()
+        gameV.drawgame()
     }
     
+    CheckAllBaddies() {
+        for (let i = 0; i < gameM.baddies.length; i++) {
+            
+            let result = this.CheckColision(gameM.baddies[i], gameM.player)
+            if (result) {
+    
+                this.gameRunning = false;
+                gameV.canvas.style.cursor = 'default';
+                
+            }
+        }
+    }
+    
+    CheckColision(a, b) {
+        if (a.x < b.x + b.width && b.x < a.x + a.width &&
+            a.y < b.y + b.width && b.y < a.y + a.width
+        ) {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+
+    keydown = (e) => {
+    
+        if (e.key === " " || e.key === "Enter") {
+            this.gameRunning = true
+        }
+    }
 }
-window.addEventListener ("keydown", keydown)
-function keydown (e) {
 
-if (e.key === " " || e.key === "Enter" )
-{
-    gameRunning = true
+class GameView {
+    //properties
+    canvas;
+    ctx;
+    restartButton = document.getElementById("restartButton");
+//constructor
+    constructor() {
+        this.canvas = document.getElementById("game-canvas");
+
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.width = 700;
+        this.canvas.height = 400;
+        this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        this.ctx.fillRect (0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#789';
+        this.ctx.fillRect(50, 50, 25, 25);
+        this.ctx.fillRect(300, 300, 10, 10);
+    }
+    //methods
+    drawgame() {
+        this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        if (gameC.gameRunning === false) {
+            return;
+
+            
+            
+        }
+
+        for (let i = 0; i < gameM.baddies.length; i++) {
+            let obj = gameM.baddies[i]
+            this.ctx.fillStyle = '#000'
+            this.ctx.fillRect(obj.x, obj.y, obj.width, obj.height)
+        }
+        this.ctx.fillStyle = '#a00'
+        this.ctx.fillRect(gameM.player.x, gameM.player.y, gameM.player.width, gameM.player.height)
+    }
+
+    
 }
+
+class GameModel{    
+     player = {
+        x: 350,
+        y: 200,
+        width: 5,
+        height: 6,
+    }
+    baddies = []
 }
 
+let gameM = new GameModel();
+let gameV = new GameView();
+let gameC = new GameController();
 
-
-drawgame ()
+gameV.drawgame();
