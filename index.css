@@ -93,7 +93,7 @@ padding:2em;
 body {
     background-image: repeating-conic-gradient(#3fa 50%, #2d9 100%, #1c8 150%);
 
-    overflow: hidden
+    /* overflow: hidden */
 }
 
 #otherweb {
